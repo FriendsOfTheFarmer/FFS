@@ -6,9 +6,10 @@ const VendorForm = (props) => {
     e.preventDefault();  //prevents reload of the page
     props.submitVendor(); //our action to create to submit vendor data
   }
-  let vItems = [];
+  let vItems = [];// our display of items
   for (let i = 0; i < props.vendorItems.length; i += 1) {
-    vItems.push(<VendorItems
+    vItems.push(  //rendering the items from our two arrays in the state
+    <VendorItems
       key={i}
       componentID = {i}
       vendorItems={props.vendorItems[i]}
@@ -18,7 +19,7 @@ const VendorForm = (props) => {
   }
   const handleAdd = () => {
     console.log('handle add');
-    props.addItem();
+    props.addItem(); //add two empty entries to the arrays, causing them populate the form list
   }
 
   return (
@@ -46,7 +47,7 @@ const VendorForm = (props) => {
           onChange={props.updateVendorDetails}
           value={props.blogPost}>
         </input>
-        {vItems}
+        {vItems} 
 
         <input className="VendorSubmit" type="submit" value="Submit Vendor Data"></input>
       </form>

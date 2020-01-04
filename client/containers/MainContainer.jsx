@@ -11,7 +11,6 @@ const mapStateToProps = (state) => ({
   customerDisplayTog: state.rendering.customerDisplayTog,
 
   //vendor stuff
-
   vendorItems: state.vendor.vendorItems,
   marketName: state.vendor.marketName,
   blogPost: state.vendor.blogPost,
@@ -46,7 +45,7 @@ class MainContainer extends Component {
         <div>
           <button id='vendorDisplay' type='button' onClick={() => { this.props.vendorDisplayToggle() }}>Go to Vendor Form</button>
           <button id='customerDisplay' type='button' onClick={() => { this.props.customerDisplayToggle() }}>Go to Customer Display</button>
-          {this.props.vendorDisplayTog === true &&
+          {this.props.vendorDisplayTog === true && //conditional rendering for the vendor diplay, as toggled by the button
             <div>
               <VendorForm
                 updateItemDetails={this.props.updateItemDetails}
@@ -61,18 +60,14 @@ class MainContainer extends Component {
                 submitVendor={this.props.submitVendor}
               />
             </div>}
-          {this.props.customerDisplayTog === true &&
+          {this.props.customerDisplayTog === true && //conditional rendering for the customer display, as toggled by the button
             <div>
               <AComponent
                 display={this.props.display}
                 anAction={this.props.anAction}
               />
             </div>}
-
-
-
         </div>
-
       </main>
     )
   }
