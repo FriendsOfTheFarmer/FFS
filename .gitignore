@@ -31,11 +31,14 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
+# dotenv environment variables file
+.env
+
 # node-waf configuration
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
+build
 
 # Dependency directories
 node_modules/
