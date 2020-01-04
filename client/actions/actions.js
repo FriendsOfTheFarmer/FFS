@@ -4,8 +4,23 @@ export const anAction = () => ({
   type: types.AN_ACTION,
 });
 
+export const updateVendorDetails = (str, id) => ({
+  type: types.UPDATE_VENDOR_DETAILS,
+  payload: {string: str, id: id}
+})
 
+export const submitVendor = () => ({
+  type: types.SUBMIT_VENDOR,
+})
 
+export const addItem = () => ({
+  type: types.ADD_ITEM,
+})
+
+export const updateItemDetails = (value, id, className) => ({
+  type: types.UPDATE_ITEM_DETAILS,
+  payload: {value: value, id: id, className: className}
+})
 
 
 
