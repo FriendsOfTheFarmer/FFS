@@ -1,11 +1,15 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  vendorItems: ['asd000', 'asddas', 'sgsfdgd'],
+  vendorItems: ['evans escargo', 'lukes lavender', 'dans dates'],
   productPrice: ['1', '5', '7'],
+  productDetails: ['tasty snails', 'aromatic herbs', 'decent fruit'],
   vendorName: '',
   marketName: '',
   blogPost: '',
+  vendorEmail: '',
+  vendorWebsite: '',
+  vendorPhone: '',
   counter: 0,
 }
 
@@ -14,14 +18,28 @@ const vendorReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case types.SUBMIT_VENDOR: {
-      let {vendorItems,productPrice,vendorName,marketName,blogPost,counter} = state;
+      let {  vendorItems,
+        productPrice,
+        productDetails,
+        vendorName,
+        marketName,
+        blogPost,
+        vendorEmail,
+        vendorWebsite,
+        vendorPhone,
+        counter,      
+      } = state;
       
       let senderObj = {
         vendorItems,
         productPrice,
+        productDetails,
         vendorName,
         marketName,
         blogPost,
+        vendorEmail,
+        vendorWebsite,
+        vendorPhone,
       }
       console.log("sender Object", senderObj);
       counter = 0;
@@ -30,6 +48,10 @@ const vendorReducer = (state = initialState, action) => {
         ...state,
         vendorItems: [''],
         productPrice: [''],
+        productDetails: [''],
+        vendorEmail: '',
+        vendorWebsite: '',
+        vendorPhone: '',
         vendorName: '',
         marketName: '',
         blogPost: '',
@@ -39,7 +61,7 @@ const vendorReducer = (state = initialState, action) => {
 
     case types.UPDATE_ITEM_DETAILS: {
       console.log('updating the items');
-      let { vendorItems, productPrice, counter } = state;
+      let { vendorItems, productPrice, productDetails, counter } = state;
       switch (action.payload.className) {
         case "vendorItems": {
           let input = (action.payload.id).slice(2); //grab the number of the array from within the ID
@@ -63,6 +85,19 @@ const vendorReducer = (state = initialState, action) => {
           return {
             ...state,
             productPrice: productPrice,
+            counter: counter
+          }
+        }
+        case "productDetails": {
+          console.log('updating the price');
+          let input = (action.payload.id).slice(2); //grab the number of the array from within the ID
+          let index = Number(input);
+
+          productDetails[index] = action.payload.value
+          counter -= 1;
+          return {
+            ...state,
+            productDetails: productDetails,
             counter: counter
           }
         }
@@ -107,7 +142,24 @@ const vendorReducer = (state = initialState, action) => {
             blogPost: action.payload.string
           }
         }
-
+        case "vendorEmail": {
+          return {
+            ...state,
+            vendorEmail: action.payload.string
+          }
+        }
+        case "vendorWebsite": {
+          return {
+            ...state,
+            vendorWebsite: action.payload.string
+          }
+        }
+        case "vendorPhone": {
+          return {
+            ...state,
+            vendorPhone: action.payload.string
+          }
+        }
       }
 
       return {
