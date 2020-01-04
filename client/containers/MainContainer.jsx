@@ -14,6 +14,7 @@ const mapStateToProps = (state) => ({
   vendorItems: state.vendor.vendorItems,
   productPrice: state.vendor.productPrice,
   productDetails: state.vendor.productDetails,
+  vendorName: state.vendor.vendorName,
   marketName: state.vendor.marketName,
   blogPost: state.vendor.blogPost,
   vendorEmail: state.vendor.vendorEmail,
@@ -58,6 +59,7 @@ class MainContainer extends Component {
                 vendorItems={this.props.vendorItems}
                 productPrice={this.props.productPrice}
                 productDetails={this.props.productDetails}
+                vendorName={this.props.vendorName}
                 marketName={this.props.marketName}
                 blogPost={this.props.blogPost}
                 vendorEmail={this.props.vendorEmail}
