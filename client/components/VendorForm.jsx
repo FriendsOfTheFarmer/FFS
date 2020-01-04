@@ -14,6 +14,7 @@ const VendorForm = (props) => {
       componentID = {i}
       vendorItems={props.vendorItems[i]}
       productPrice={props.productPrice[i]}
+      productDetails={props.productDetails[i]}
       updateItemDetails={props.updateItemDetails}
     />);
   }
@@ -47,8 +48,28 @@ const VendorForm = (props) => {
           onChange={props.updateVendorDetails}
           value={props.blogPost}>
         </input>
-        {vItems} 
-
+        <input
+          id="vendorEmail"
+          type="text"
+          placeholder="ie. dudeAbides@juno.com"
+          onChange={props.updateVendorDetails}
+          value={props.vendorEmail}>
+        </input>
+        <input
+          id="vendorWebsite"
+          type="text"
+          placeholder="ie. www.iLikeCats.com"
+          onChange={props.updateVendorDetails}
+          value={props.vendorWebsite}>
+        </input>
+        <input
+          id="vendorPhone"
+          type="text"
+          placeholder="ie. 9038675309 "
+          onChange={props.updateVendorDetails}
+          value={props.vendorPhone}>
+        </input>
+        {vItems}
         <input className="VendorSubmit" type="submit" value="Submit Vendor Data"></input>
       </form>
     </div>
