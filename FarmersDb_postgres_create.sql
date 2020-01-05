@@ -1,7 +1,9 @@
 CREATE TABLE "market" (
 	"market_id" serial NOT NULL,
 	"market_name" varchar(255) NOT NULL UNIQUE,
+	"market_phone" varchar(255) NOT NULL,
 	"market_location" varchar(255) NOT NULL,
+	"market_website" varchar(255) NOT NULL,
 	"market_details" varchar(500) NOT NULL,
 	CONSTRAINT "market_pk" PRIMARY KEY ("market_id")
 ) WITH (
@@ -26,7 +28,7 @@ CREATE TABLE "business_hours" (
 CREATE TABLE "vendor" (
 	"vendor_id" serial NOT NULL,
 	"vendor_name" varchar(255) NOT NULL UNIQUE,
-	"vendor_phone" integer NOT NULL,
+	"vendor_phone" varchar(255) NOT NULL,
 	"vendor_website" varchar(255) NOT NULL,
 	"vendor_email" varchar(255) NOT NULL,
 	"vendor_bio" varchar(500) NOT NULL,
@@ -61,22 +63,13 @@ CREATE TABLE "item" (
 
 CREATE TABLE "vendor_item" (
 	"vendor_item_id" serial NOT NULL,
-	"vendors_items_price" numeric(4,2) NOT NULL,
+	"vendor_item_price" numeric(4,2) NOT NULL,
 	"vendor_item_details" varchar(255) NOT NULL,
 	"vendor_id" integer NOT NULL,
 	"item_id" integer NOT NULL,
-	CONSTRAINT "vendor_item_pk" PRIMARY KEY ("vendor_item_id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-CREATE TABLE "date_item" (
-	"date_item_id" serial NOT NULL,
-	"vendor_item_id" integer NOT NULL,
 	"date_id" integer NOT NULL,
-	CONSTRAINT "date_item_pk" PRIMARY KEY ("date_item_id")
+	"market_id" integer NOT NULL,
+	CONSTRAINT "vendor_item_pk" PRIMARY KEY ("vendor_item_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -93,6 +86,5 @@ ALTER TABLE "date" ADD CONSTRAINT "date_fk1" FOREIGN KEY ("vendor_id") REFERENCE
 
 ALTER TABLE "vendor_item" ADD CONSTRAINT "vendor_item_fk0" FOREIGN KEY ("vendor_id") REFERENCES "vendor"("vendor_id");
 ALTER TABLE "vendor_item" ADD CONSTRAINT "vendor_item_fk1" FOREIGN KEY ("item_id") REFERENCES "item"("item_id");
-
-ALTER TABLE "date_item" ADD CONSTRAINT "date_item_fk0" FOREIGN KEY ("vendor_item_id") REFERENCES "vendor_item"("vendor_item_id");
-ALTER TABLE "date_item" ADD CONSTRAINT "date_item_fk1" FOREIGN KEY ("date_id") REFERENCES "date"("date_id");
+ALTER TABLE "vendor_item" ADD CONSTRAINT "vendor_item_fk2" FOREIGN KEY ("date_id") REFERENCES "date"("date_id");
+ALTER TABLE "vendor_item" ADD CONSTRAINT "vendor_item_fk3" FOREIGN KEY ("market_id") REFERENCES "market"("market_id");
