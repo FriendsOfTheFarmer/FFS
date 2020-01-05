@@ -15,6 +15,7 @@ const VendorForm = (props) => {
       vendorItems={props.vendorItems[i]}
       productPrice={props.productPrice[i]}
       productDetails={props.productDetails[i]}
+      dateDetails={props.dateDetails[i]}
       updateItemDetails={props.updateItemDetails}
     />);
   }
