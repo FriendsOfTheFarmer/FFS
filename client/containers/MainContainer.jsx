@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   //BE SURE NOT TO WRITE A PROP THE SAME LABEL AS AN ACTION, THIS WILL OVERRIDE THE PROP NAME
   vendorDisplayTog: state.rendering.vendorDisplayTog,
   customerDisplayTog: state.rendering.customerDisplayTog,
-
+  vendorItemTog: state.rendering.vendorItemTog,
   //vendor stuff
   vendorItems: state.vendor.vendorItems,
   productPrice: state.vendor.productPrice,
@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
   //rendering actions
   vendorDisplayToggle: () => dispatch(actions.vendorDisplayToggle()),
   customerDisplayToggle: () => dispatch(actions.customerDisplayToggle()),
-
+  vendorItemToggle: () => dispatch(actions.vendorItemToggle()),
   //vendor actions
   updateVendorDetails: e => dispatch(actions.updateVendorDetails(e.target.value, e.target.id)),
   updateItemDetails: e => dispatch(actions.updateItemDetails(e.target.value, e.target.id, e.target.className)),
@@ -47,28 +47,34 @@ class MainContainer extends Component {
   render(props) {
     return (
       <main>
-        <div id="main">
+        <div id="main" className="main-buttons">
           <button
-            id="vendorDisplay"
-            type="button"
-            onClick={() => {
-              this.props.vendorDisplayToggle();
-            }}
-          >
-            Go to Vendor Form
-          </button>
-          <button
-            id="customerDisplay"
-            type="button"
-            onClick={() => {
-              this.props.customerDisplayToggle();
-            }}
-          >
-            Go to Customer Display
-          </button>
+              id="customerDisplayButton"
+              class="btn btn-primary btn-lg"
+              type="button"
+              onClick={() => {
+                this.props.customerDisplayToggle();
+              }}
+            >
+              Customer
+            </button>
+            <button
+              id="vendorDisplayButton"
+              class="btn btn-primary btn-lg"
+              type="button"
+              onClick={() => {
+                this.props.vendorDisplayToggle();
+              }}
+            >
+              Vendor
+            </button>
           {this.props.vendorDisplayTog === true && ( //conditional rendering for the vendor diplay, as toggled by the button
-            <div>
+            <div id="vendorTable">
               <VendorForm
+                vendorItemTog={this.props.vendorItemTog}
+                vendorItemToggle={this.props.vendorItemToggle}
+
+
                 updateItemDetails={this.props.updateItemDetails}
                 updateVendorDetails={this.props.updateVendorDetails}
                 vendorItems={this.props.vendorItems}

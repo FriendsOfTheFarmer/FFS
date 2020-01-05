@@ -1,22 +1,93 @@
+form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#root {
+  background-color: olivedrab;
+  height: 10rem;
+}
+
+#App {
+ margin-top: 2%;
+ align-items: center;
+ align-self: center;
+ align-content: center;
+ text-align: center;
+ text-size-adjust: large;
+}
+
 #title {
   font-family: The Farmer Textured;
   font-size: 600%;
-  margin-left: 39%;
 }
 
 #subTitle {
   margin-top: -1%;
-  margin-left: 33.5%;
 }
 
-#App {
-//  margin-left: 30%;
- margin-top: 2%;
- text-size-adjust: large;
-}
-
-#vendorDisplay {
-  margin-right: 3%;
+.main-buttons {
   margin-top: 3%;
-  margin-left: 36%;
 }
+
+#customerDisplayButton {
+  margin-right: 5%;
+  border: solid orange;
+  width: 18%;
+}
+
+input{
+  flex-basis: 20%;
+}
+#vendorDisplayButton {
+  border: solid orangered;
+  width: 18%;
+}
+
+#vendorTable {
+  margin-top: 5%;
+}
+
+.flexBreak {
+  flex-basis: 100%;
+  height: 5px;
+}
+
+.vendorForm {
+  margin-top: 10%;
+
+}
+
+.topForm{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 4%
+}
+
+#vendorForm {
+  flex-basis: 100%;
+}
+
+#tableNav {
+  margin-top: -7%;
+}
+
+tr{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+th{
+  flex-basis: 20%;
+}
+
+.vendorSubmit {
+  margin-bottom: 3%;
+}
+
+

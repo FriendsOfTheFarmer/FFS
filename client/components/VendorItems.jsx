@@ -31,6 +31,7 @@ const VendorItems = props => {
         onChange={props.updateItemDetails}
         value={props.dateDetails}
       ></input>
+      <div className = "flexBreak"></div>
     </div>
   );
 };

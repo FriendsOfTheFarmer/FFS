@@ -9,6 +9,9 @@ export const customerDisplayToggle = () => ({
   type: types.CUSTOMER_DISPLAY_TOGGLE,
 });
 
+export const vendorItemToggle = () => ({
+  type: types.VENDOR_ITEM_TOGGLE,
+})
 
 
 //a generic action to follow into the reducer and the container
