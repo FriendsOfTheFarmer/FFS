@@ -10,7 +10,6 @@ const reducers = combineReducers({
   vendor: vendorReducer,
   rendering: renderingReducer,
   customer: customerReducer
-
 })
 
 

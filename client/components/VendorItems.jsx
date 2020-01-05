@@ -16,6 +16,13 @@ const VendorItems = (props) => {
       onChange={props.updateItemDetails}
       value={props.productPrice}>
     </input>
+    <input
+      className = "productDetails"
+      id={`pD ${props.componentID}`}
+      type="text"
+      onChange={props.updateItemDetails}
+      value={props.productDetails}>
+    </input>
   </div>)
 }
 

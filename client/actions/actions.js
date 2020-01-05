@@ -42,6 +42,37 @@ export const updateItemDetails = (value, id, className) => ({
 })
 
 
+// This area begins our Market display actions
+
+export const  veniceDisplayTog = () => ({
+  type: types.VENICE_DISPLAY_TOGGLE,
+})
+
+export const santaMonicaDisplayTog  = () => ({
+  type: types.SANTA_MONICA_DISPLAY_TOGGLE,
+})
+
+export const  marVistaDisplayTog = () => ({
+  type: types.MAR_VISTA_DISPLAY_TOGGLE,
+})
+
+export const marinaDelReyDisplayTog = () => ({
+  type: types.MARINA_DEL_REY_DISPLAY_TOGGLE,
+})
+
+export const culverCityDisplayTog = () => ({
+  type: types.CULVER_CITY_DISPLAY_TOGGLE,
+})
+
+
+
+
+
+
+
+
+
+
 
 //left in for reference on REDUX-THUNK Shenanigans 
 // export const findDeviceAsyncThunk = (name) => {

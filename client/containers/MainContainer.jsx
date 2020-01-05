@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js';
 import AComponent from '../components/AComponent';
 import VendorForm from '../components/VendorForm';
+import CustomerContainer from './CustomerContainer';
+
+
 
 const mapStateToProps = (state) => ({
   //toggles for rendering
@@ -12,10 +15,15 @@ const mapStateToProps = (state) => ({
 
   //vendor stuff
   vendorItems: state.vendor.vendorItems,
+  productPrice: state.vendor.productPrice,
+  productDetails: state.vendor.productDetails,
+  vendorName: state.vendor.vendorName,
   marketName: state.vendor.marketName,
   blogPost: state.vendor.blogPost,
-  vendorName: state.vendor.vendorName,
-  productPrice: state.vendor.productPrice,
+  vendorEmail: state.vendor.vendorEmail,
+  vendorWebsite: state.vendor.vendorWebsite,
+  vendorPhone: state.vendor.vendorPhone,
+  //counter included to force a render
   counter: state.vendor.counter,
 
   // generic placeholder
@@ -50,22 +58,25 @@ class MainContainer extends Component {
               <VendorForm
                 updateItemDetails={this.props.updateItemDetails}
                 updateVendorDetails={this.props.updateVendorDetails}
+
                 vendorItems={this.props.vendorItems}
+                productPrice={this.props.productPrice}
+                productDetails={this.props.productDetails}
+                vendorName={this.props.vendorName}
                 marketName={this.props.marketName}
                 blogPost={this.props.blogPost}
-                counter={this.props.counter}
-                vendorName={this.props.vendorName}
-                productPrice={this.props.productPrice}
+                vendorEmail={this.props.vendorEmail}
+                vendorWebsite={this.props.vendorWebsite}
+                vendorPhone={this.props.vendorPhone}
+
                 addItem={this.props.addItem}
                 submitVendor={this.props.submitVendor}
               />
             </div>}
           {this.props.customerDisplayTog === true && //conditional rendering for the customer display, as toggled by the button
             <div>
-              <AComponent
-                display={this.props.display}
-                anAction={this.props.anAction}
-              />
+              <CustomerContainer />
+
             </div>}
         </div>
       </main>
