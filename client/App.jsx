@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div id="App">
         <h1 id="title">Fresh Feed</h1>
-        <h3 id="subTitle">Your local Farmer's Market Resource</h3>
+        <h3 id="subTitle">Your Local Farmer's Market Resource</h3>
         <MainContainer />
       </div>
     )
