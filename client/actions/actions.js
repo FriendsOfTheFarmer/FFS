@@ -64,7 +64,9 @@ export const culverCityDisplayTog = () => ({
   type: types.CULVER_CITY_DISPLAY_TOGGLE,
 })
 
-
+export const marketDisplayToggle = () => ({
+  type: types.MARKET_DISPLAY_TOGGLE,
+})
 
 
 

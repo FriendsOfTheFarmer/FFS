@@ -50,7 +50,7 @@ class MainContainer extends Component {
   render(props) {
     return (
       <main>
-        <div>
+        <div id="main">
           <button id='vendorDisplay' type='button' onClick={() => { this.props.vendorDisplayToggle() }}>Go to Vendor Form</button>
           <button id='customerDisplay' type='button' onClick={() => { this.props.customerDisplayToggle() }}>Go to Customer Display</button>
           {this.props.vendorDisplayTog === true && //conditional rendering for the vendor diplay, as toggled by the button
