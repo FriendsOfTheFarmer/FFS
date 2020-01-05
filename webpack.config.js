@@ -60,6 +60,10 @@ module.exports = {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ],
   },

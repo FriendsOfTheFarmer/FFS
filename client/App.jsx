@@ -8,9 +8,9 @@ class App extends Component {
 
   render() {
     return (
-      <div id="app">
-        <h1>Header</h1>
-        <h2>A subtitle</h2>
+      <div id="App">
+        <h1 id="title">Fresh Feed</h1>
+        <h3 id="subTitle">Your local Farmer's Market Resource</h3>
         <MainContainer />
       </div>
     )
