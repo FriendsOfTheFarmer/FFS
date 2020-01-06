@@ -5,7 +5,12 @@ class Vendor extends Component {
   render() {
     return (
       <div>
-        {this.props.vendorName}
+        <button className="buttonVendorInMarket"
+          type="button"
+          value={this.props.vendorName}
+          >
+          {this.props.vendorName}
+        </button>
       </div>
     )
   }

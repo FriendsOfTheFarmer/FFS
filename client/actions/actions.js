@@ -89,54 +89,39 @@ export const findAllMarketAsyncThunk = () => {
   }
 }
 
+export const findAllVendorsPerMarketAsyncThunk = (marketName) => {
+  console.log('INSIDE FIND ALL VENDORS PER MARKET ASYNC THUNK!!')
+  console.log(marketName);
+  return dispatch => {
+    dispatch(fetchingStarted());
+
+    //we could have the same message for start and fail 
+    fetch(`/api/market-vendors/?market_name=${marketName}`)
+      .then(response => response.json())
+      .then(vendorFound => {
+        console.log("Vendor Found!!", vendorFound)
+        //unique here 
+        dispatch(findAllVendorsPerMarketSuccess(vendorFound));
+      })
+      .catch(err => {
+        dispatch(fetchingFail(err));
+      })
+  }
+}
 
 
-// export const findDeviceAsyncThunk = (name) => {
-//   console.log('inside findDeviceThunk')
-//   console.log('searching with', name);
-//   return dispatch => {
-//     dispatch(findThunkDeviceStarted());
-
-
-
-//     fetch(`/api/?id=${name}`)
-//       .then(response => response.json())
-//       .then(deviceFound => {
-//         setTimeout(() => {
-//           console.log("device found", deviceFound)
-//           dispatch(findThunkDeviceSuccess(deviceFound));
-//         })
-//           .catch(err => {
-//             dispatch(findThunkDeviceFail(err));
-//           })
-//       };
-//   };
-//   //modify the state to check if its fetching and handle the errors 
-
-
-
-//   const findThunkDeviceStarted = () => ({
-//     type: types.FIND_THUNK_DEVICE_STARTED
-//   });
-
-//   const findThunkDeviceSuccess = deviceFound => ({
-//     type: types.FIND_THUNK_DEVICE_SUCCESS,
-//     payload: {
-//       ...deviceFound
-//     }
-//   });
-
-//   const findThunkDeviceFail = error => ({
-//     type: types.FIND_THUNK_DEVICE_FAIL,
-//     payload: {
-//       error
-//     }
-//   });
 
 const findAllMarketSuccess = marketsFound => ({
   type: types.FIND_ALL_MARKET_SUCCESS,
   payload: {
     marketsFound
+  }
+});
+
+const findAllVendorsPerMarketSuccess = vendorsFound => ({
+  type: types.FIND_ALL_VENDORS_PER_MARKET_SUCCESS,
+  payload: {
+    vendorsFound
   }
 });
 

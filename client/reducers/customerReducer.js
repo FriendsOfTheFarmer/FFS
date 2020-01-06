@@ -3,12 +3,7 @@ import * as types from "../constants/actionTypes";
 
 const initialState = {
   arrayOfMarkets: [""],
-  vendorList: [
-    "Hilton Honey",
-    "Dirty Danzing",
-    "SarahSalads",
-    "LukesLavendarLillys"
-  ],
+  vendorList: ["bob"],
   marketDisplayTog: false,
 
   loading: false,
@@ -18,7 +13,7 @@ const initialState = {
 const customerReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.FIND_ALL_MARKET_SUCCESS: {
-      console.log(action.payload)
+      console.log(action.payload.vendorsFound)
       let marketArray = [];
       for (let i = 0; i < action.payload.marketsFound.length; i++) {
         marketArray.push(action.payload.marketsFound[i].market_name);
@@ -27,6 +22,21 @@ const customerReducer = (state = initialState, action) => {
       return {
         ...state,
         arrayOfMarkets: marketArray,
+        loading: false
+      }
+    }
+
+    case types.FIND_ALL_VENDORS_PER_MARKET_SUCCESS: {
+      console.log(action.payload)
+      let vendorArray = [];
+      for (let i = 0; i < action.payload.vendorsFound.length; i++) {
+        let date = new Date(action.payload.vendorsFound[i].market_vendor_date);
+        let trimDate = date.toDateString();
+        vendorArray.push(`${action.payload.vendorsFound[i].vendor_name} ||| ${trimDate}`);
+      }
+      return {
+        ...state,
+        vendorList: vendorArray,
         loading: false
       }
     }
@@ -50,7 +60,7 @@ const customerReducer = (state = initialState, action) => {
 
     case types.MARKET_DISPLAY_TOGGLE: {
       let { marketDisplayTog } = state;
-      marketDisplayTog = !marketDisplayTog;
+      marketDisplayTog = true;
       return {
         ...state,
         marketDisplayTog

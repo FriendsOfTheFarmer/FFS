@@ -11,18 +11,20 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   marketDisplayToggle: () => dispatch(actions.marketDisplayToggle()),
+  findAllVendorsPerMarketAsyncThunk: (name) => dispatch(actions.findAllVendorsPerMarketAsyncThunk(name))
 });
 
 class CustomerContainer extends Component {
   render(props) {
     return (
       <div>
-        <h1>CustomerContainer</h1>
+
         <Customer
           arrayOfMarkets={this.props.arrayOfMarkets}
           vendorList={this.props.vendorList}
           marketDisplayToggle={this.props.marketDisplayToggle}
           marketDisplayTog={this.props.marketDisplayTog}
+          findAllVendorsPerMarketAsyncThunk={this.props.findAllVendorsPerMarketAsyncThunk}
         />
       </div>
     );
