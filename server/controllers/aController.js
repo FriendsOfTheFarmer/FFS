@@ -71,23 +71,60 @@ aController.findAllMarkets = (req, res, next) => {
      vendor_email,
      vendor_bio];
 
-     const sqlQueryStr = `insert into vendor
-                           (vendor_name,
-                           vendor_phone,
-                           vendor_website,
-                           vendor_email,
-                           vendor_bio)
-                           values
-                           ($1, $2, $3, $4, $5)
-                           ;`
-                           ;
+     res.locals.particularVendor = values;
+     next();
+    // please uncomment below and delete lines 74+75 to have the query do it's thing
+    //  const sqlQueryStr = `insert into vendor
+    //                        (vendor_name,
+    //                        vendor_phone,
+    //                        vendor_website,
+    //                        vendor_email,
+    //                        vendor_bio)
+    //                        values
+    //                        ($1, $2, $3, $4, $5)
+    //                        ;`
+    //                        ;
 
-     db.query(sqlQueryStr, values).then((data) => {
-       res.locals = data;
-       // console.log('data: ', res.locals.rows);
-       return next();
-     })
-       .catch((err) => next(err));
+    //  db.query(sqlQueryStr, values).then((data) => {
+    //    res.locals = data;
+    //    // console.log('data: ', res.locals.rows);
+    //    return next();
+    //  })
+    //    .catch((err) => next(err));
+ };
+
+
+
+  aController.createVendorItems = (req, res, next) => {
+    // post vendor details
+
+     // for this to work the application will have to send these in the body of
+     //  the request as json object containing these keys.
+     const { item_name,
+     vendor_item_price,
+     vendor_item_details,
+     market_vendor_date,
+     market_name,
+     vendor_name} = req.body; // or req.params depending how we build it
+
+     const values = [item_name,
+     vendor_item_price,
+     vendor_item_details,
+     market_vendor_date,
+     market_name,
+     vendor_name];
+
+     res.locals.particularVendorItems = values;
+     next();
+    // please uncomment below and delete lines 74+75 to have the query do it's thing
+    //  const sqlQueryStr = NEED TO BUILD THIS OUT
+
+    //  db.query(sqlQueryStr, values).then((data) => {
+    //    res.locals = data;
+    //    // console.log('data: ', res.locals.rows);
+    //    return next();
+    //  })
+    //    .catch((err) => next(err));
  };
 
 aController.findVendorDetails = (req, res, next) => {

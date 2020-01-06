@@ -2,7 +2,7 @@ import React from "react";
 
 const VendorItems = props => {
   return (
-    <div>
+    <div className = "itemRowGenerated">
       <input
         className="vendorItems"
         id={`vI ${props.componentID}`}
@@ -31,7 +31,13 @@ const VendorItems = props => {
         onChange={props.updateItemDetails}
         value={props.dateDetails}
       ></input>
-      <div className = "flexBreak"></div>
+      <input
+        className="itemLocation"
+        id={`iL ${props.componentID}`}
+        type="text"
+        onChange={props.updateItemDetails}
+        value={props.itemLocation}
+      ></input>
     </div>
   );
 };
