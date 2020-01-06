@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  marketDisplayToggle: () => dispatch(actions.marketDisplayToggle())
+  marketDisplayToggle: () => dispatch(actions.marketDisplayToggle()),
 });
 
 class CustomerContainer extends Component {
