@@ -28,7 +28,7 @@ const aController = {};
  // To-Do
 //  Find all Market on page load (customer facing) - Done
 // Find all Vendors per Market when they click on drop down (customer facing) - Done
-// Find all Items by Vendor for single Market -> Sorted By Date
+// Find all Items by Vendor for single Market -> Sorted By Date - Done
 // Search all items for all vendors, sorted by date, per market
 
 // aController.sendMainApp = (req, res, next) => {
