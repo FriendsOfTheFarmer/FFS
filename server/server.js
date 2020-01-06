@@ -29,7 +29,7 @@ app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../
 
 // app.get('/styles.css', (req, res) => {
 //   res.set({
-//     'content-type': 'text/css; charset=utf-8'  //no trailing commas here, 
+//     'content-type': 'text/css; charset=utf-8'  //no trailing commas here,
 //   });
 //   res.status(200).sendFile(path.join(__dirname, '../client/styles.css'));
 // });
