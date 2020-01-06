@@ -173,7 +173,7 @@ aController.findVendorByMarket = (req, res, next) => {
     // console.log('req.query.id: ', req.query.id);
     // const values = [req.query.id];
 
-    const { market_name } = req.body; // or req.params depending how we build it
+    const { market_name } = req.query; // or req.params depending how we build it
 
     const values = [market_name];
 
