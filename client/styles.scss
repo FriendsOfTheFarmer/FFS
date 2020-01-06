@@ -3,6 +3,7 @@ form {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  flex-basis: 100%
 }
 #root {
   background-color: olivedrab;
@@ -37,7 +38,11 @@ form {
   width: 18%;
 }
 
-input{
+#vendorForm input{
+  flex-basis: 20%;
+}
+
+#vendorForm input{
   flex-basis: 20%;
 }
 #vendorDisplayButton {
@@ -56,7 +61,6 @@ input{
 
 .vendorForm {
   margin-top: 10%;
-
 }
 
 .topForm{
@@ -66,13 +70,35 @@ input{
   justify-content: center;
   margin-bottom: 4%
 }
+.bottomForm{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 4%
+}
+
+#itemForm{
+  display: flex;
+  flex-basis: 100%
+}
+
+.itemRowGenerated {
+  display: flex;
+  flex-basis: 100%;
+  width: 100%
+}
+
+.itemRowGenerated input{
+  flex-basis: 20%;
+}
 
 #vendorForm {
   flex-basis: 100%;
 }
 
 #tableNav {
-  margin-top: -7%;
+  margin-top: -15px;
 }
 
 tr{
@@ -86,8 +112,21 @@ th{
   flex-basis: 20%;
 }
 
+#addButton {
+  margin-right: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .vendorSubmit {
   margin-bottom: 3%;
+}
+
+.itemSubmit{
+    background: darkslateblue;
+    color: lightgrey;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
 }
 
 

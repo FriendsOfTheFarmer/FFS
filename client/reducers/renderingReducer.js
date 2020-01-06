@@ -4,6 +4,7 @@ const initialState = {
   vendorDisplayTog: false,
   customerDisplayTog: false,
   vendorItemTog: false,
+  readyTog: false,
 }
 
 const renderingReducer = (state = initialState, action) => {
@@ -15,6 +16,15 @@ const renderingReducer = (state = initialState, action) => {
       return {
         ...state,
         vendorItemTog,
+      }
+    }
+
+        case types.READY_TOGGLE: {
+      let {readyTog} = state;
+      readyTog = !readyTog
+      return {
+        ...state,
+        readyTog,
       }
     }
 

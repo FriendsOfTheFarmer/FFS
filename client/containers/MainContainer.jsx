@@ -10,14 +10,15 @@ const mapStateToProps = state => ({
   vendorDisplayTog: state.rendering.vendorDisplayTog,
   customerDisplayTog: state.rendering.customerDisplayTog,
   vendorItemTog: state.rendering.vendorItemTog,
+  readyTog: state.rendering.readyTog,
   //vendor stuff
   vendorItems: state.vendor.vendorItems,
   productPrice: state.vendor.productPrice,
   productDetails: state.vendor.productDetails,
   dateDetails: state.vendor.dateDetails,
+  itemLocation: state.vendor.itemLocation,
   vendorName: state.vendor.vendorName,
-  marketName: state.vendor.marketName,
-  blogPost: state.vendor.blogPost,
+  vendorBio: state.vendor.vendorBio,
   vendorEmail: state.vendor.vendorEmail,
   vendorWebsite: state.vendor.vendorWebsite,
   vendorPhone: state.vendor.vendorPhone,
@@ -33,12 +34,14 @@ const mapDispatchToProps = dispatch => ({
   vendorDisplayToggle: () => dispatch(actions.vendorDisplayToggle()),
   customerDisplayToggle: () => dispatch(actions.customerDisplayToggle()),
   vendorItemToggle: () => dispatch(actions.vendorItemToggle()),
+  readyToggle: () => dispatch(actions.readyToggle()),
   //vendor actions
   updateVendorDetails: e => dispatch(actions.updateVendorDetails(e.target.value, e.target.id)),
   updateItemDetails: e => dispatch(actions.updateItemDetails(e.target.value, e.target.id, e.target.className)),
   addItem: () => dispatch(actions.addItem()),
-  submitVendor: () => dispatch(actions.submitVendor()),
-
+  //vendor submit
+  submitVendorDetails: () => dispatch(actions.submitVendorDetails()),
+  submitItemDetails: () => dispatch(actions.submitItemDetails()),
   //generic action for placeholder
   anAction: () => dispatch(actions.anAction())
 });
@@ -48,25 +51,12 @@ class MainContainer extends Component {
     return (
       <main>
         <div id="main" className="main-buttons">
-          <button
-              id="customerDisplayButton"
-              class="btn btn-primary btn-lg"
-              type="button"
-              onClick={() => {
-                this.props.customerDisplayToggle();
-              }}
-            >
-              Customer
+          <button id="customerDisplayButton" className="btn btn-primary btn-lg" type="button" onClick={() => { this.props.customerDisplayToggle(); }}
+          >
+            Customer
             </button>
-            <button
-              id="vendorDisplayButton"
-              class="btn btn-primary btn-lg"
-              type="button"
-              onClick={() => {
-                this.props.vendorDisplayToggle();
-              }}
-            >
-              Vendor
+          <button id="vendorDisplayButton" className="btn btn-primary btn-lg" type="button" onClick={() => { this.props.vendorDisplayToggle(); }}>
+            Vendor
             </button>
           {this.props.vendorDisplayTog === true && ( //conditional rendering for the vendor diplay, as toggled by the button
             <div id="vendorTable">
@@ -74,21 +64,31 @@ class MainContainer extends Component {
                 vendorItemTog={this.props.vendorItemTog}
                 vendorItemToggle={this.props.vendorItemToggle}
 
+                //ready toggle for the submission of the bottom half of the form
+                readyToggle={this.props.readyToggle}
+                readyTog={this.props.readyTog}
+
 
                 updateItemDetails={this.props.updateItemDetails}
                 updateVendorDetails={this.props.updateVendorDetails}
+
                 vendorItems={this.props.vendorItems}
                 productPrice={this.props.productPrice}
                 productDetails={this.props.productDetails}
                 dateDetails={this.props.dateDetails}
+                itemLocation={this.props.itemLocation}
+
+                //vendor details(top of the form in the vendor component)
                 vendorName={this.props.vendorName}
-                marketName={this.props.marketName}
-                blogPost={this.props.blogPost}
+                vendorBio={this.props.vendorBio}
                 vendorEmail={this.props.vendorEmail}
                 vendorWebsite={this.props.vendorWebsite}
                 vendorPhone={this.props.vendorPhone}
+
+                //vendor item arrays (bottom of the form in the vendor component)
                 addItem={this.props.addItem}
-                submitVendor={this.props.submitVendor}
+                submitVendorDetails={this.props.submitVendorDetails}
+                submitItemDetails={this.props.submitItemDetails}
               />
             </div>
           )}

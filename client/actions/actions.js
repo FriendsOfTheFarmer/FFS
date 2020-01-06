@@ -13,6 +13,9 @@ export const vendorItemToggle = () => ({
   type: types.VENDOR_ITEM_TOGGLE,
 })
 
+export const readyToggle = () => ({
+  type: types.READY_TOGGLE,
+})
 
 //a generic action to follow into the reducer and the container
 export const anAction = () => ({
@@ -26,8 +29,13 @@ export const updateVendorDetails = (str, id) => ({
 })
 
 //this will be our submit vendor, taking all the information in the state and sending it to the server/DB
-export const submitVendor = () => ({
-  type: types.SUBMIT_VENDOR,
+
+export const submitVendorDetails = () => ({
+  type: types.SUBMIT_VENDOR_DETAILS,
+})
+
+export const submitItemDetails = () => ({
+  type: types.SUBMIT_ITEM_DETAILS,
 })
 
 //adding an additional item to the form (see the two arrays in vendorReducer)

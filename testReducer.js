@@ -40,7 +40,7 @@ case types.SUBMIT_VENDOR_DETAILS: {
         item_name: vendorItems,
         vendor_item_price: productPrice,
         vendor_item_details: productDetails,
-        market_vendor_date" dateDetails,
+        market_vendor_date: dateDetails,
 	//need to add market per item array--->   market_name: marketName
         vendor_name: vendorName,
       };
