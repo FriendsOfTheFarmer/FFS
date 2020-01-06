@@ -21,7 +21,7 @@ class Customer extends Component {
           title="Farmer's Markets"
           size="lg"
         >
-          {dropdownItem};
+          {dropdownItem}
         </DropdownButton>
 
         {this.props.marketDisplayTog === true && (

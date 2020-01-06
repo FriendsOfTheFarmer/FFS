@@ -43,7 +43,9 @@ const mapDispatchToProps = dispatch => ({
   submitVendorDetails: () => dispatch(actions.submitVendorDetails()),
   submitItemDetails: () => dispatch(actions.submitItemDetails()),
   //generic action for placeholder
-  anAction: () => dispatch(actions.anAction())
+  anAction: () => dispatch(actions.anAction()),
+  findAllMarketAsyncThunk: () => dispatch(actions.findAllMarketAsyncThunk())
+
 });
 
 class MainContainer extends Component {
@@ -51,7 +53,8 @@ class MainContainer extends Component {
     return (
       <main>
         <div id="main" className="main-buttons">
-          <button id="customerDisplayButton" className="btn btn-primary btn-lg" type="button" onClick={() => { this.props.customerDisplayToggle(); }}
+          {/* we need to have a comma separating the functions in the onclick  */}
+          <button id="customerDisplayButton" className="btn btn-primary btn-lg" type="button" onClick={() => { this.props.customerDisplayToggle(), this.props.findAllMarketAsyncThunk(); }}
           >
             Customer
             </button>
@@ -98,7 +101,7 @@ class MainContainer extends Component {
             </div>
           )}
         </div>
-      </main>
+      </main >
     );
   }
 }

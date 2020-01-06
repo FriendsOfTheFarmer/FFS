@@ -25,7 +25,7 @@ export const anAction = () => ({
 //this updates the vendor details in the form to the state
 export const updateVendorDetails = (str, id) => ({
   type: types.UPDATE_VENDOR_DETAILS,
-  payload: {string: str, id: id}
+  payload: { string: str, id: id }
 })
 
 //this will be our submit vendor, taking all the information in the state and sending it to the server/DB
@@ -49,7 +49,7 @@ export const addItem = () => ({
 //classname is the items or the prices for the items (which array we need to update)
 export const updateItemDetails = (value, id, className) => ({
   type: types.UPDATE_ITEM_DETAILS,
-  payload: {value: value, id: id, className: className}
+  payload: { value: value, id: id, className: className }
 })
 
 
@@ -68,6 +68,29 @@ export const marketDisplayToggle = () => ({
 
 
 //left in for reference on REDUX-THUNK Shenanigans 
+//this is invoked when the customer button dropdown is clicked
+//we're npt assing anything in because we are grabbing all 
+export const findAllMarketAsyncThunk = () => {
+  console.log('INSIDE FIND ALL MARKET ASYNC THUNK!!')
+  return dispatch => {
+    dispatch(fetchingStarted());
+
+    //we could have the same message for start and fail 
+    fetch(`/api/`)
+      .then(response => response.json())
+      .then(marketsFound => {
+        console.log("Market FOUND!!", marketsFound)
+        //unique here 
+        dispatch(findAllMarketSuccess(marketsFound));
+      })
+      .catch(err => {
+        dispatch(fetchingFail(err));
+      })
+  }
+}
+
+
+
 // export const findDeviceAsyncThunk = (name) => {
 //   console.log('inside findDeviceThunk')
 //   console.log('searching with', name);
@@ -77,36 +100,53 @@ export const marketDisplayToggle = () => ({
 
 
 //     fetch(`/api/?id=${name}`)
-//     .then(response => response.json())
-//     .then(deviceFound => {
-//       setTimeout(() => {
-//         console.log("device found",deviceFound)
-//         dispatch(findThunkDeviceSuccess(deviceFound));
-//       }, 2500);
-//       // console.log("device found",deviceFound)
-//       // dispatch(findThunkDeviceSuccess(deviceFound));
-//     })
-//     .catch(err => {
-//       dispatch(findThunkDeviceFail(err));
-//     })
+//       .then(response => response.json())
+//       .then(deviceFound => {
+//         setTimeout(() => {
+//           console.log("device found", deviceFound)
+//           dispatch(findThunkDeviceSuccess(deviceFound));
+//         })
+//           .catch(err => {
+//             dispatch(findThunkDeviceFail(err));
+//           })
+//       };
 //   };
-// };
+//   //modify the state to check if its fetching and handle the errors 
 
 
-// const findThunkDeviceStarted = () => ({
-//   type: types.FIND_THUNK_DEVICE_STARTED
-// });
 
-// const findThunkDeviceSuccess = deviceFound => ({
-//   type: types.FIND_THUNK_DEVICE_SUCCESS,
-//   payload: {
-//     ...deviceFound
-//   }
-// });
+//   const findThunkDeviceStarted = () => ({
+//     type: types.FIND_THUNK_DEVICE_STARTED
+//   });
 
-// const findThunkDeviceFail = error => ({
-//   type: types.FIND_THUNK_DEVICE_FAIL,
-//   payload: {
-//     error
-//   }
-// });
+//   const findThunkDeviceSuccess = deviceFound => ({
+//     type: types.FIND_THUNK_DEVICE_SUCCESS,
+//     payload: {
+//       ...deviceFound
+//     }
+//   });
+
+//   const findThunkDeviceFail = error => ({
+//     type: types.FIND_THUNK_DEVICE_FAIL,
+//     payload: {
+//       error
+//     }
+//   });
+
+const findAllMarketSuccess = marketsFound => ({
+  type: types.FIND_ALL_MARKET_SUCCESS,
+  payload: {
+    marketsFound
+  }
+});
+
+const fetchingStarted = () => ({
+  type: types.FETCHING_STARTED
+});
+
+const fetchingFail = error => ({
+  type: types.FETCHING_FAIL,
+  payload: {
+    error
+  }
+})
