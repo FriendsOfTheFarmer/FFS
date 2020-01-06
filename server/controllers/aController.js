@@ -93,10 +93,43 @@ aController.findAllMarkets = (req, res, next) => {
     //    .catch((err) => next(err));
  };
 
+ aController.createOrFindItem = (req, res, next) => {
+     // search by item name before adding item details to database
 
+     // write code here
+     // console.log('req: ', req);
+     // console.log('req.query.id: ', req.query.id);
+     // const values = [req.query.id];
+
+     const { item_name } = req.body; // or req.params depending how we build it
+
+     const values = [item_name];
+
+     const sqlQueryStr1 = `select
+                           item_name,
+                           item_id
+
+                           from item i
+
+                           where item_name like $1
+                           ;`
+                           ;
+
+     db.query(sqlQueryStr1, values).then((data) => {
+       res.locals = data;
+       // console.log('data: ', res.locals.rows);
+       // check if res.locals.rows contains any item names
+       if (res.locals.rows.length > 0){
+         return next();
+       } else {
+         // create new insertion inquiry
+       }
+     })
+       .catch((err) => next(err));
+ };
 
   aController.createVendorItems = (req, res, next) => {
-    // post vendor details
+    // post vendor item details
 
      // for this to work the application will have to send these in the body of
      //  the request as json object containing these keys.

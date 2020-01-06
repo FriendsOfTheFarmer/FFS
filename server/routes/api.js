@@ -17,7 +17,7 @@ router.get('/', aController.findAllMarkets, function (req, res, next) {
 
 router.get('/market-vendors', aController.findVendorByMarket, function (req, res, next) {
   console.log('in /market-vendors after findVendorByMarket');
-  console.log('res.locals', res.locals.rows);
+  console.log('res.locals.rows', res.locals.rows);
   const vendorNameArr = res.locals.rows;
 
   res.status(200).json(vendorNameArr);
@@ -42,10 +42,10 @@ router.post("/vendor-post", aController.createVendorDetails, (req, res, next) =>
 )
 
 //a post request for the second half of the vendor submission form
-router.post("/vendor-items", aController.createVendorItems, (req, res, next) => {
+router.post("/vendor-items", aController.createOrFindItem, aController.createVendorItems, (req, res, next) => {
   console.log('yeeet');
   console.log(res.locals.particularVendorItems)
-  res.status(200).send('hey dog vendor was added');
+  res.status(200).send('hey dog vendor item(s) and details were added');
 }
 )
 
