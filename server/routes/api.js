@@ -36,16 +36,17 @@ router.get('/vendors-date', aController.findVendorAtMarketsByDate, function (req
 //a post request for the first half of the vendor submission form
 router.post("/vendor-post", aController.createVendorDetails, (req, res, next) => {
   console.log('yoooooo');
-  console.log(res.locals.particularVendor)
-  res.status(200).send('hey dog vendor was added');
+  console.log(res.locals.rows)
+  res.status(200).json(res.locals.rows);
 }
 )
 
 //a post request for the second half of the vendor submission form
 router.post("/vendor-items", aController.createOrFindItem, aController.createVendorItems, (req, res, next) => {
-  console.log('yeeet');
-  console.log(res.locals.particularVendorItems)
-  res.status(200).send('hey dog vendor item(s) and details were added');
+  const vendorItems = res.locals.vendorItems
+  console.log('in /vendor-items after aController.createOrFindItem, aController.createVendorItems');
+  console.log('res.locals.vendorItems.rows',res.locals.vendorItems.rows);
+  res.status(200).json(vendorItems);
 }
 )
 
