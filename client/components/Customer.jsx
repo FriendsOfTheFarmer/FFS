@@ -22,11 +22,12 @@ class Customer extends Component {
       );
     }
     return (
-      <div>
+      <div className="dropdownButton">
         <DropdownButton
-          id="Markets Dropdown"
+          id="MarketsDropdown"
           title="Farmer's Markets"
           size="lg"
+          className="dropdownButton"
         >
           {dropdownItem}
         </DropdownButton>
