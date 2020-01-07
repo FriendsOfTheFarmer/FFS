@@ -48,7 +48,7 @@ const VendorForm = props => {
       <div className="topForm">
         <div className="flexBreak"></div>
         <table id="tableNav" className="table">
-          <thead className="thead-dark">
+          <thead className="thead">
             <tr>
               <th scope="col">Vendor Name</th>
               <th scope="col">Bio/Info</th>

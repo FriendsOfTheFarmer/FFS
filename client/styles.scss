@@ -1,3 +1,6 @@
+body {
+background-color: rgb(224, 194, 157);
+}
 form {
   display: flex;
   flex-direction: row;
@@ -33,9 +36,23 @@ form {
 }
 
 #customerDisplayButton {
-  margin-right: 5%;
-  border: solid orange;
-  width: 18%;
+  background-image: url(https://bloximages.newyork1.vip.townnews.com/samessenger.com/content/tncms/assets/v3/editorial/f/24/f245b99e-2bee-11ea-b6f1-4b2b9fc5fccc/5e0b7f2091f45.image.jpg?crop=1528%2C860%2C0%2C80&resize=1120%2C630&order=crop%2Cresize);
+  background-color:transparent;
+  background-repeat: no-repeat;
+  color: rgb(255, 255, 255);
+  background-size: 700px auto;
+  /* put the height and width of your image here */
+  height: 175px;
+  min-height: 175px;
+  width: 50%;
+  border: none;
+  font-family: The Farmer Textured;
+  font-size: 80px;
+}
+
+#customerDisplayButton:hover {
+  color: black;
+  box-shadow: 0 5px 15px;
 }
 
 #vendorForm input{
@@ -46,13 +63,42 @@ form {
   flex-basis: 20%;
 }
 #vendorDisplayButton {
-  border: solid orangered;
-  width: 18%;
+  
+  background-image: url(https://queenkaahumanucenter.com/wp-content/uploads/2017/03/maui-fresh-farmers-market-banner.jpg);
+  background-color:transparent;
+  background-repeat: no-repeat;
+  background-size: 700px auto;
+  /* put the height and width of your image here */
+  height: 175px;
+  min-height: 175px;
+  width: 50%;
+  border: none;
+  font-family: The Farmer Textured;
+  font-size: 80px;
+  color: black;
 }
+
+#vendorDisplayButton:hover {
+  color: rgb(255, 255, 255);
+  box-shadow: 0 5px 15px;
+} 
 
 #vendorTable {
   margin-top: 5%;
 }
+
+#MarketsDropdown {
+  background-color: olivedrab;
+  height: 15%;
+  width: 33%;
+  font-size: 50px;
+  color: black;
+}
+#MarketsDropdown:hover {
+  color: rgb(255, 255, 255);
+  box-shadow: 0 5px 15px;
+} 
+
 
 .flexBreak {
   flex-basis: 100%;
@@ -120,7 +166,14 @@ th{
 
 .vendorSubmit {
   margin-bottom: 3%;
+  background-color: olivedrab;
+  font-weight: bold;
 }
+
+.vendorSubmit:hover{
+  color: rgb(255, 255, 255);
+  box-shadow: 0 5px 15px;
+} 
 
 .itemSubmit{
     background: darkslateblue;
@@ -130,3 +183,51 @@ th{
 }
 
 
+.dropdownButton{
+  font-family: "The Farmer Textured";
+  font-size: 35px;
+
+}
+
+.dropdown-menu{
+  font-family: "The Farmer Textured";
+  font-size: 30px;
+  color: pink;
+}
+
+h1{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.buttonVendorInMarket{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  border-radius: 5px;
+}
+
+.buttonVendorInMarket:hover{
+  color: black;
+  box-shadow: 0 5px 15px;
+}
+
+.thead{
+  background-color: olivedrab;
+  border: 1px solid black;
+}
+
+.btn{
+  margin-top: 50px;
+}
+
+#readyButton{
+  font-weight: bold;
+}
+#addButton:hover{
+color: white, 0.2;
+box-shadow: 0 5px 15px;
+
+}
+
+#readyButton:hover{
+  color: white, 0.2;
+  box-shadow: 0 5px 15px;
+}

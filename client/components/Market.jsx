@@ -16,8 +16,6 @@ class Market extends Component {
 
     return (
       <div>
-
-        <h1>This is where we will render the Vendor Component</h1>
         {specificVendor}
       </div>
     )
