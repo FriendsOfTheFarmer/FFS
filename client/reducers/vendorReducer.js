@@ -51,7 +51,7 @@ const vendorReducer = (state = initialState, action) => {
         vendorBio: "",
         counter: 0
       };
-      
+
     }
 
     case types.SUBMIT_ITEM_DETAILS: {
@@ -131,7 +131,7 @@ const vendorReducer = (state = initialState, action) => {
           };
         }
         case "productDetails": {
-          console.log("updating the price");
+          console.log("updating the item detail");
           let input = action.payload.id.slice(2); //grab the number of the array from within the ID
           let index = Number(input);
 
@@ -157,7 +157,7 @@ const vendorReducer = (state = initialState, action) => {
           };
         }
         case "itemLocation": {
-          console.log("updating the date");
+          console.log("updating the item location");
           let input = action.payload.id.slice(2); //grab the number of the array from within the ID
           let index = Number(input);
 

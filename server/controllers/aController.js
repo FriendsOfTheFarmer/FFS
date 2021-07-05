@@ -71,60 +71,185 @@ aController.findAllMarkets = (req, res, next) => {
      vendor_email,
      vendor_bio];
 
-     res.locals.particularVendor = values;
-     next();
-    // please uncomment below and delete lines 74+75 to have the query do it's thing
-    //  const sqlQueryStr = `insert into vendor
-    //                        (vendor_name,
-    //                        vendor_phone,
-    //                        vendor_website,
-    //                        vendor_email,
-    //                        vendor_bio)
-    //                        values
-    //                        ($1, $2, $3, $4, $5)
-    //                        ;`
-    //                        ;
 
-    //  db.query(sqlQueryStr, values).then((data) => {
-    //    res.locals = data;
-    //    // console.log('data: ', res.locals.rows);
-    //    return next();
-    //  })
-    //    .catch((err) => next(err));
+     const sqlQueryStr = `insert into vendor
+                           (vendor_name,
+                           vendor_phone,
+                           vendor_website,
+                           vendor_email,
+                           vendor_bio)
+                           values
+                           ($1, $2, $3, $4, $5)
+                           ;`
+                           ;
+
+     db.query(sqlQueryStr, values).then((data) => {
+       res.locals = data;
+       // console.log('data: ', res.locals.rows);
+       return next();
+     })
+       .catch((err) => next(err));
  };
 
+ aController.createOrFindItem = (req, res, next) => {
+     // search by item name before adding item details to database
 
+     // write code here
+     // console.log('req: ', req);
+     // console.log('req.query.id: ', req.query.id);
+     // const values = [req.query.id];
+
+     const { item_name } = req.body; // should be an array of strings due to batch processing
+     // put each item from item_name array into the values array for parameterization
+     const values = item_name.map((item) => item);
+
+     // list of formatted values to be searched for in database
+     let vList = "";
+     values.forEach((item, i) => {
+        if (i < values.length - 1) {
+          vList += `$${i+1},`
+          } else if (i === values.length - 1) {
+          vList += `$${i+1}`
+        }
+      }
+      )
+      // list of formatted values to be inserted into database
+      let iList = "";
+       values.forEach((item, i) => {
+         if (i < values.length - 1) {
+           iList += `('${item}'),`
+           } else if (i === values.length - 1) {
+           iList += `('${item}')`
+         }
+       }
+       )
+       let orList = iList.replace(/\,/gi,' or item_name like ');
+
+console.log('iList: ', iList);
+console.log('vList: ', vList);
+console.log('orList: ', orList);
+// do update set (item_name) = ${orList}
+// where item_name = ${orList}
+
+// insert into item (item_name)
+//                       values ${iList}
+//                       on conflict (item_name)
+//                       do update set (item_name) = EXCLUDED.item_name
+//                       where item.item_name = EXCLUDED.item_name
+//                       returning *;
+     const sqlQueryStr1 = `insert into item (item_name)
+                           values ${iList}
+                           on conflict (item_name)
+                           do nothing;
+
+                           `
+                           ;
+
+     const sqlQueryStr2 = `select * from item
+                          where item_name like ${orList};`
+
+     db.query(sqlQueryStr1).then((blob) => db.query(sqlQueryStr2))
+     .then((data) => {
+       // data format is res.locals.items.rows is an array
+       // the array is filled with objects for each item
+       // each item object includes {item_name: string, item_id: number}
+       res.locals.items = data;
+
+       console.log('data: ', res.locals.items);
+       // check if res.locals.rows contains any item names
+       // if (res.locals.rows.length > 0){
+       //   return next();
+       // } else {
+       //   // create new insertion inquiry
+       // }
+       return next();
+     })
+       .catch((err) => next(err));
+ };
 
   aController.createVendorItems = (req, res, next) => {
-    // post vendor details
+    // post vendor item details
 
      // for this to work the application will have to send these in the body of
      //  the request as json object containing these keys.
-     const { item_name,
-     vendor_item_price,
+     //  item name and item id comes from res.locals.items.rows
+     // all other variables are actually arrays except for vendor name!!!
+     const { vendor_item_price,
      vendor_item_details,
      market_vendor_date,
      market_name,
-     vendor_name} = req.body; // or req.params depending how we build it
-
-     const values = [item_name,
-     vendor_item_price,
+     vendor_name} = req.body;
+     console.log('vendor_name: ', vendor_name);
+console.log('res.locals.items.rows: ', res.locals.items.rows);
+    // map all values from objects in res.locals.items.rows array to a single array
+     const item_name  = res.locals.items.rows.map(({ item_name }) => item_name);
+     const item_id = res.locals.items.rows.map(({ item_id }) => item_id);
+console.log('item_id, item_name: ', item_id, item_name);
+     const passedItemDetails = [vendor_item_price,
      vendor_item_details,
      market_vendor_date,
-     market_name,
-     vendor_name];
+     market_name, item_id]
+     // create lists of formatted values to be inserted into database
+     const listTranspose = (arr) => {
+      if (!arr.length) return arr;
+      console.log('arr: ', arr);
+      return arr[0].map((col, i) => arr.map(row => row[i]));
+      }
 
-     res.locals.particularVendorItems = values;
-     next();
-    // please uncomment below and delete lines 74+75 to have the query do it's thing
-    //  const sqlQueryStr = NEED TO BUILD THIS OUT
+     const transposedDetails = listTranspose(passedItemDetails);
 
-    //  db.query(sqlQueryStr, values).then((data) => {
-    //    res.locals = data;
-    //    // console.log('data: ', res.locals.rows);
-    //    return next();
-    //  })
-    //    .catch((err) => next(err));
+    let values = transposedDetails.map((row) => {
+      let valString = "(";
+      row.forEach((item, i) => {
+        if (i < row.length - 1) {
+          valString += `'${item}',`
+        } else if (i === row.length - 1) {
+          valString += `${item}, '${vendor_name}')`
+        }
+      }
+    )
+    // console.log('valString: ', valString);
+    return valString;
+    }
+     )
+     console.log('crazy value string: ', values);
+
+     // list of formatted values to be searched for in database
+     let vList = "";
+      values.forEach((item, i) => {
+        if (i < values.length - 1) {
+          vList += `$${i+1},`
+          } else if (i === values.length - 1) {
+          vList += `$${i+1}`
+        }
+      }
+      )
+
+      console.log('vList: ', vList);
+     // const values = [item_name.map((item) => item),
+     //   item_id.map((id) => id),
+     //   vendor_item_price.map((vendor_item_price) => vendor_item_price),
+     //   vendor_item_details.map((vendor_item_details) => vendor_item_details),
+     //   market_vendor_date.map((market_vendor_date) => market_vendor_date),
+     //   market_name.map((market_name) => market_name),
+     //   vendor_name.map((vendor_name) => vendor_name)];
+
+
+     const sqlQueryStr = `insert into vendor_item (vendor_item_price,
+                           vendor_item_details,
+                           market_vendor_date,
+                           market_name, item_id, vendor_name)
+                           values ${vList}
+                           ;`
+                           ;
+
+
+     db.query(sqlQueryStr).then((data) => {
+       res.locals.vendorItems = data;
+       // console.log('data: ', res.locals.rows);
+       return next();
+     })
+       .catch((err) => next(err));
  };
 
 aController.findVendorDetails = (req, res, next) => {
